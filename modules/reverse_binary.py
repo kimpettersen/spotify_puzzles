@@ -23,22 +23,7 @@ def reverse_number(num):
     return int(rev_num, 2)
 
 
-def test_reverse_number():
-    '''
-    Test that the examples work back and forth
-    '''
-    assert type(reverse_number(1)) == int
-    assert reverse_number(13) == 11
-    assert reverse_number(11) == 13
-    assert reverse_number(47) == 61
-    assert reverse_number(61) == 47
-
-
 if __name__ == "__main__":
-    try:
-        test_reverse_number()
-    except AssertionError, e:
-        print 'Test failed: %s' % str(e)
 
     '''
     Read from stdin
