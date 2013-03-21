@@ -2,7 +2,7 @@ import sys
 sys.path.append('./')
 
 import unittest
-from modules import reverse_binary as rev
+from puzzles import reverse_binary as rev
 
 
 class TestReverseBinary(unittest.TestCase):

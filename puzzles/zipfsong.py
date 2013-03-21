@@ -9,31 +9,31 @@ def reader():
     Reader function that will be passed to functions that needs to read input.
     Extract this to make code more testable
     '''
-    return sys.stdin.readline()
+    inputs = []
+    for i in sys.stdin.readlines():
+        inputs.append(i)
+    return inputs
 
 
-def get_setup_arguments(reader):
+def get_songs(reader):
     '''
     n = number of songs on album = 1 ≤ n ≤ 50000,
     m = amout of songs in result = 1 ≤ m ≤ n
     '''
-    setup = reader()
-    n, m = setup.split(' ', 1)
+    inputs = reader()
+    n, m = inputs[0].split(' ', 1)
+
+    # remove the first input from the list
+    inputs = inputs[1:]
 
     # make sure that input can be casted to int
     n = int(n)
     m = int(m)
-    validate_setup_numbers(n, m)
-    return n, m
+    validate_inputs_numbers(n, m)
 
-
-def get_songs(n, reader):
-    '''
-    Read songs from 0 - n
-    '''
+    # Read songs from 0 - n
     songs = []
-    for i in range(0, n):
-        track = reader()
+    for track in inputs:
         played, song = track.split(' ', 1)
         played = int(played)
 
@@ -46,10 +46,10 @@ def get_songs(n, reader):
         # list format: [('how many times played', 'song name'),..]
         songs.append((played, song))
 
-    return songs
+    return m, songs
 
 
-def validate_setup_numbers(n, m):
+def validate_inputs_numbers(n, m):
     '''
     Validate the first two number a user enter
     '''
@@ -111,8 +111,7 @@ if __name__ == "__main__":
     Perform all calls and prints the result
     '''
     # pass the reader for better testability
-    n, m = get_setup_arguments(reader)
-    songs = get_songs(n, reader)
+    m, songs = get_songs(reader)
     result = get_best_songs(m, songs)
 
     # print the result
